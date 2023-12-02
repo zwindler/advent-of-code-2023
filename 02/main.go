@@ -31,15 +31,36 @@ func main() {
 	puzzleData, _ := readPuzzleData(filename)
 
 	fmt.Println(getPossibleGamesSum(puzzleData))
+	fmt.Println(getMinimumGamePowerSum(puzzleData))
 }
 
-func getPossibleGamesSum(puzzleInput []game) int {
-	var sum int
+func getPossibleGamesSum(puzzleInput []game) (sum int) {
 	for _, game := range puzzleInput {
 		if isGamePossible(game) {
 			sum += game.gameID
 		}
 	}
+	return sum
+}
+
+func getMinimumGamePowerSum(puzzleInput []game) (sum int) {
+	for _, game := range puzzleInput {
+		minBlue, minGreen, minRed := 0, 0, 0
+		for _, draw := range game.drawList {
+			if draw.blue > minBlue {
+				minBlue = draw.blue
+			}
+			if draw.green > minGreen {
+				minGreen = draw.green
+			}
+			if draw.red > minRed {
+				minRed = draw.red
+			}
+		}
+		gamePower := minBlue * minGreen * minRed
+		sum += gamePower
+	}
+
 	return sum
 }
 
@@ -85,8 +106,6 @@ func parseLine(line string) game {
 		currentDraw := draw{blue: blue, green: green, red: red}
 		currentGame.drawList = append(currentGame.drawList, currentDraw)
 	}
-
-	fmt.Println(currentGame)
 
 	return currentGame
 }
