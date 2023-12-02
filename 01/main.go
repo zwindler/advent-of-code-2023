@@ -31,15 +31,16 @@ func getCalibrationValueV2(puzzleInput []string) int {
 	var fixedPuzzleInput []string
 	// this is a bit tricky because there might be some overlapping words like oneight
 	// for the first digit you need to take 1ight, for the last on8
-	r := strings.NewReplacer("one", "o1e",
-		"two", "t2o",
-		"three", "t3e",
-		"four", "f4r",
-		"five", "f5e",
-		"six", "s6x",
-		"seven", "s7n",
-		"eight", "e8t",
-		"nine", "n9e")
+	// so I need to avoid "consuming" finishing letters that I might need later
+	r := strings.NewReplacer("one", "1ne",
+		"two", "2wo",
+		"three", "3ee",
+		"four", "4ur",
+		"five", "5ve",
+		"six", "6ix",
+		"seven", "7en",
+		"eight", "8ht",
+		"nine", "9ne")
 
 	for _, line := range puzzleInput {
 		// run replacer twice to deal with overlapping words

@@ -16,12 +16,22 @@ func TestGetCalibrationValue(t *testing.T) {
 }
 
 func TestGetCalibrationValueV2(t *testing.T) {
-	testData := []string{"two1nine", "eightwothree", "abcone2threexyz", "xtwone3four", "4nineeightseven2", "zoneight234", "7pqrstsixteen"}
-	expectedTestValue := 281
+	tcs := []struct {
+		data          []string
+		expectedValue int
+	}{
+		{
+			data:          []string{"two1nine", "eightwothree", "abcone2threexyz", "xtwone3four", "4nineeightseven2", "zoneight234", "7pqrstsixteen"},
+			expectedValue: 281},
+		{
+			data:          []string{"twoneoneight"},
+			expectedValue: 28},
+	}
 
-	testValue := getCalibrationValueV2(testData)
-
-	if testValue != expectedTestValue {
-		t.Errorf("Calibration value is %v, expected %d", testValue, expectedTestValue)
+	for _, tc := range tcs {
+		testValue := getCalibrationValueV2(tc.data)
+		if testValue != tc.expectedValue {
+			t.Errorf("Calibration value is %v, expected %d", testValue, tc.expectedValue)
+		}
 	}
 }
