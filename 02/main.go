@@ -14,9 +14,9 @@ type game struct {
 }
 
 type draw struct {
-	red   int
 	blue  int
 	green int
+	red   int
 }
 
 var (
@@ -80,9 +80,33 @@ func parseLine(line string) game {
 	currentGame.gameID, _ = strconv.Atoi(matches[1])
 
 	draws := strings.Split(matches[2], ";")
-	for _, draw := range draws {
-		fmt.Println(draw)
+	for _, drawString := range draws {
+		blue, green, red := parseDraw(drawString)
+		currentDraw := draw{blue: blue, green: green, red: red}
+		currentGame.drawList = append(currentGame.drawList, currentDraw)
 	}
 
+	fmt.Println(currentGame)
+
 	return currentGame
+}
+
+func parseDraw(currentDraw string) (blue, green, red int) {
+	reBlue := regexp.MustCompile(`(\d+) blue`)
+	reGreen := regexp.MustCompile(`(\d+) green`)
+	reRed := regexp.MustCompile(`(\d+) red`)
+
+	matchesBlue := reBlue.FindStringSubmatch(currentDraw)
+	if matchesBlue != nil {
+		blue, _ = strconv.Atoi(matchesBlue[1])
+	}
+	matchesGreen := reGreen.FindStringSubmatch(currentDraw)
+	if matchesGreen != nil {
+		green, _ = strconv.Atoi(matchesGreen[1])
+	}
+	matchesRed := reRed.FindStringSubmatch(currentDraw)
+	if matchesRed != nil {
+		red, _ = strconv.Atoi(matchesRed[1])
+	}
+	return blue, green, red
 }
