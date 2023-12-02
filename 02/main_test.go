@@ -42,7 +42,7 @@ func TestGetPossibleGamesSum(t *testing.T) {
 	}
 }
 
-func TestTetMinimumGamePowerSum(t *testing.T) {
+func TestGetMinimumGamePowerSum(t *testing.T) {
 	tcs := []struct {
 		data          []game
 		expectedValue int
