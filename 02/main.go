@@ -1,5 +1,13 @@
 package main
 
+import (
+	"fmt"
+	"io/ioutil"
+	"regexp"
+	"strconv"
+	"strings"
+)
+
 type game struct {
 	gameID   int
 	drawList []draw
@@ -19,7 +27,10 @@ var (
 )
 
 func main() {
-	getPossibleGamesSum(emptyGame)
+	filename := "puzzleData.txt"
+	puzzleData, _ := readPuzzleData(filename)
+
+	fmt.Println(getPossibleGamesSum(puzzleData))
 }
 
 func getPossibleGamesSum(puzzleInput []game) int {
@@ -39,4 +50,39 @@ func isGamePossible(currentGame game) bool {
 		}
 	}
 	return true
+}
+
+func readPuzzleData(filename string) ([]game, error) {
+	content, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+
+	data := string(content)
+	lines := strings.Split(data, "\n")
+
+	var puzzleData []game
+	for _, line := range lines {
+		if line != "" {
+			currentGame := parseLine(line)
+			puzzleData = append(puzzleData, currentGame)
+		}
+	}
+
+	return puzzleData, nil
+}
+
+func parseLine(line string) game {
+	var currentGame game
+	re := regexp.MustCompile(`Game (\d+): (.+)`)
+	matches := re.FindStringSubmatch(line)
+
+	currentGame.gameID, _ = strconv.Atoi(matches[1])
+
+	draws := strings.Split(matches[2], ";")
+	for _, draw := range draws {
+		fmt.Println(draw)
+	}
+
+	return currentGame
 }
