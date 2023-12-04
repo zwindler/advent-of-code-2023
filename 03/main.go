@@ -2,22 +2,11 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"regexp"
 	"strconv"
+	"strings"
 )
-
-var testPartsMap = []string{
-	"467..114..",
-	"...*......",
-	"..35..633.",
-	"......#...",
-	"617*......",
-	".....+.58.",
-	"..592.....",
-	"......755.",
-	"...$.*....",
-	".664.598..",
-}
 
 type mapNumber struct {
 	line         int
@@ -30,8 +19,10 @@ type mapNumber struct {
 var numbersFound = []mapNumber{}
 
 func main() {
-	fmt.Println(sumPartNumbers(testPartsMap))
+	filename := "puzzleData.txt"
+	puzzleData, _ := readPuzzleData(filename)
 
+	fmt.Println(sumPartNumbers(puzzleData))
 }
 
 func sumPartNumbers(partsMap []string) (sum int) {
@@ -76,7 +67,8 @@ func findContiguousDigitsIndex(line string, lineNumber int) (numbersInLine []map
 }
 
 func findSymbols(currentLine string) [][]int {
-	re := regexp.MustCompile(`[\*\#\+\$\/\%\-\@\=]`)
+	re := regexp.MustCompile(`[\/\*\&\+\-\#\@\$\=\%]`)
+
 	return re.FindAllStringIndex(currentLine, -1)
 }
 
@@ -88,4 +80,23 @@ func checkIfSymbolConnectsWithANumber(row, column int) {
 			numbersFound[idx].isPartNumber = true
 		}
 	}
+}
+
+func readPuzzleData(filename string) ([]string, error) {
+	content, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+
+	data := string(content)
+	lines := strings.Split(data, "\n")
+
+	var puzzleData []string
+	for _, line := range lines {
+		if line != "" {
+			puzzleData = append(puzzleData, line)
+		}
+	}
+
+	return puzzleData, nil
 }

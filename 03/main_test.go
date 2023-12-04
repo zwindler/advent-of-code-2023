@@ -2,6 +2,19 @@ package main
 
 import "testing"
 
+var testPartsMap = []string{
+	"467..114..",
+	"...*......",
+	"..35..633.",
+	"......#...",
+	"617*......",
+	".....+.58.",
+	"..592.....",
+	"......755.",
+	"...$.*....",
+	".664.598..",
+}
+
 func TestSumPartNumbers(t *testing.T) {
 	tcs := []struct {
 		data          []string
