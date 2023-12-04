@@ -26,15 +26,10 @@ func main() {
 }
 
 func sumPartNumbers(partsMap []string) (sum int) {
-	// find all numbers
-	lineNumber := 0
-	for _, line := range partsMap {
-		lineNumber += 1
-		numbersFound = append(numbersFound, findContiguousDigitsIndex(line, lineNumber)...)
-	}
+	findNumbers(partsMap)
 
 	// find all symbols and update numbers that are parts
-	lineNumber = 0
+	lineNumber := 0
 	for _, line := range partsMap {
 		lineNumber += 1
 		for _, symbol := range findSymbols(line) {
@@ -48,6 +43,14 @@ func sumPartNumbers(partsMap []string) (sum int) {
 		}
 	}
 	return sum
+}
+
+func findNumbers(partsMap []string) {
+	lineNumber := 0
+	for _, line := range partsMap {
+		lineNumber += 1
+		numbersFound = append(numbersFound, findContiguousDigitsIndex(line, lineNumber)...)
+	}
 }
 
 func findContiguousDigitsIndex(line string, lineNumber int) (numbersInLine []mapNumber) {
@@ -89,6 +92,8 @@ func checkIfSymbolConnectsWithANumber(row, column int) {
 }
 
 func sumGearRatio(partsMap []string) (sum int) {
+	findNumbers(partsMap)
+
 	// find all "*" and check if they have 2 numbers attached
 	lineNumber := 0
 	for _, line := range partsMap {
@@ -97,11 +102,21 @@ func sumGearRatio(partsMap []string) (sum int) {
 			sum += checkIfStarConnectsWith2Numbers(lineNumber, star[0])
 		}
 	}
-	return 0
+	return sum
 }
 
 func checkIfStarConnectsWith2Numbers(row, column int) int {
-	
+	connected := []int{}
+	for _, number := range numbersFound {
+		if (column <= number.end && column >= number.begin-1) &&
+			(row >= number.line-1 && row <= number.line+1) {
+			// confirmed part connected to star
+			connected = append(connected, number.value)
+		}
+	}
+	if len(connected) == 2 {
+		return connected[0] * connected[1]
+	}
 	return 0
 }
 
