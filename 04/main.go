@@ -20,6 +20,17 @@ func main() {
 	fmt.Println(puzzleData)
 }
 
+func sumCardValue(puzzleData []card) (sum int) {
+	for _, card := range puzzleData {
+		getCardValue(card)
+	}
+	return 0
+}
+
+func getCardValue(currentCard card) {
+
+}
+
 func readPuzzleData(filename string) ([]card, error) {
 	content, err := ioutil.ReadFile(filename)
 	if err != nil {
