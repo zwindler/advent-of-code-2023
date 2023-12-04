@@ -72,6 +72,12 @@ func findSymbols(currentLine string) [][]int {
 	return re.FindAllStringIndex(currentLine, -1)
 }
 
+func findStars(currentLine string) [][]int {
+	re := regexp.MustCompile(`[\*]`)
+
+	return re.FindAllStringIndex(currentLine, -1)
+}
+
 func checkIfSymbolConnectsWithANumber(row, column int) {
 	for idx, number := range numbersFound {
 		if (column <= number.end && column >= number.begin-1) &&
@@ -80,6 +86,23 @@ func checkIfSymbolConnectsWithANumber(row, column int) {
 			numbersFound[idx].isPartNumber = true
 		}
 	}
+}
+
+func sumGearRatio(partsMap []string) (sum int) {
+	// find all "*" and check if they have 2 numbers attached
+	lineNumber := 0
+	for _, line := range partsMap {
+		lineNumber += 1
+		for _, star := range findStars(line) {
+			sum += checkIfStarConnectsWith2Numbers(lineNumber, star[0])
+		}
+	}
+	return 0
+}
+
+func checkIfStarConnectsWith2Numbers(row, column int) int {
+	
+	return 0
 }
 
 func readPuzzleData(filename string) ([]string, error) {

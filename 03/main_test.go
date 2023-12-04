@@ -30,3 +30,19 @@ func TestSumPartNumbers(t *testing.T) {
 		}
 	}
 }
+
+func TestSumGearRatio(t *testing.T) {
+	tcs := []struct {
+		data          []string
+		expectedValue int
+	}{
+		{data: testPartsMap,
+			expectedValue: 467835},
+	}
+	for _, tc := range tcs {
+		testValue := sumGearRatio(tc.data)
+		if testValue != tc.expectedValue {
+			t.Errorf("Sum value is %v, expected %d", testValue, tc.expectedValue)
+		}
+	}
+}
