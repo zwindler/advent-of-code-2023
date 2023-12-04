@@ -22,12 +22,12 @@ func main() {
 	filename := "puzzleData.txt"
 	puzzleData, _ := readPuzzleData(filename)
 
+	findNumbers(puzzleData)
 	fmt.Println(sumPartNumbers(puzzleData))
+	fmt.Println(sumGearRatio(puzzleData))
 }
 
 func sumPartNumbers(partsMap []string) (sum int) {
-	findNumbers(partsMap)
-
 	// find all symbols and update numbers that are parts
 	lineNumber := 0
 	for _, line := range partsMap {
@@ -92,8 +92,6 @@ func checkIfSymbolConnectsWithANumber(row, column int) {
 }
 
 func sumGearRatio(partsMap []string) (sum int) {
-	findNumbers(partsMap)
-
 	// find all "*" and check if they have 2 numbers attached
 	lineNumber := 0
 	for _, line := range partsMap {

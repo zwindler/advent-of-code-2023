@@ -24,6 +24,7 @@ func TestSumPartNumbers(t *testing.T) {
 			expectedValue: 4361},
 	}
 	for _, tc := range tcs {
+		findNumbers(tc.data)
 		testValue := sumPartNumbers(tc.data)
 		if testValue != tc.expectedValue {
 			t.Errorf("Sum value is %v, expected %d", testValue, tc.expectedValue)
@@ -40,6 +41,7 @@ func TestSumGearRatio(t *testing.T) {
 			expectedValue: 467835},
 	}
 	for _, tc := range tcs {
+		findNumbers(tc.data)
 		testValue := sumGearRatio(tc.data)
 		if testValue != tc.expectedValue {
 			t.Errorf("Sum value is %v, expected %d", testValue, tc.expectedValue)
