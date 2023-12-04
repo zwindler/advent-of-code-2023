@@ -74,7 +74,7 @@ func findSymbols(currentLine string) [][]int {
 
 func checkIfSymbolConnectsWithANumber(row, column int) {
 	for idx, number := range numbersFound {
-		if (column <= number.end+1 && column >= number.begin-1) &&
+		if (column <= number.end && column >= number.begin-1) &&
 			(row >= number.line-1 && row <= number.line+1) {
 			// confirmed part number
 			numbersFound[idx].isPartNumber = true
