@@ -27,26 +27,36 @@ type mapNumber struct {
 	isPartNumber bool
 }
 
+var numbersFound = []mapNumber{}
+
 func main() {
-	sumPartNumbers(testPartsMap)
+	fmt.Println(sumPartNumbers(testPartsMap))
+
 }
 
-func sumPartNumbers(partsMap []string) int {
-	numbersFound := []mapNumber{}
+func sumPartNumbers(partsMap []string) (sum int) {
+	// find all numbers
 	lineNumber := 0
 	for _, line := range partsMap {
 		lineNumber += 1
 		numbersFound = append(numbersFound, findContiguousDigitsIndex(line, lineNumber)...)
 	}
 
-	fmt.Println(numbersFound)
-
+	// find all symbols and update numbers that are parts
 	lineNumber = 0
 	for _, line := range partsMap {
 		lineNumber += 1
-		fmt.Println(findSymbols(line))
+		for _, symbol := range findSymbols(line) {
+			checkIfSymbolConnectsWithANumber(lineNumber, symbol[0])
+		}
 	}
-	return 0
+
+	for _, number := range numbersFound {
+		if number.isPartNumber {
+			sum += number.value
+		}
+	}
+	return sum
 }
 
 func findContiguousDigitsIndex(line string, lineNumber int) (numbersInLine []mapNumber) {
@@ -70,6 +80,12 @@ func findSymbols(currentLine string) [][]int {
 	return re.FindAllStringIndex(currentLine, -1)
 }
 
-func checkIfSymbolConnectsWithANumber(row, columns int){
-
+func checkIfSymbolConnectsWithANumber(row, column int) {
+	for idx, number := range numbersFound {
+		if (column <= number.end+1 && column >= number.begin-1) &&
+			(row >= number.line-1 && row <= number.line+1) {
+			// confirmed part number
+			numbersFound[idx].isPartNumber = true
+		}
+	}
 }
