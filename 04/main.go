@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"regexp"
 	"slices"
 	"strconv"
@@ -24,9 +24,9 @@ func main() {
 
 func sumCardValue(puzzleData []card) (sum int) {
 	for _, card := range puzzleData {
-		getCardValue(card)
+		sum += getCardValue(card)
 	}
-	return 0
+	return sum
 }
 
 func getCardValue(currentCard card) (value int) {
@@ -43,7 +43,7 @@ func getCardValue(currentCard card) (value int) {
 }
 
 func readPuzzleData(filename string) ([]card, error) {
-	content, err := ioutil.ReadFile(filename)
+	content, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, err
 	}
