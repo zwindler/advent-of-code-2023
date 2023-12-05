@@ -38,7 +38,30 @@ func getCardValue(currentCard card) (value int) {
 	return
 }
 
-func totalScratchboards(puzzleData []card) (value int) {
+func totalScratchboards(puzzleData []card) (sum int) {
+	cardCopiesMap := make(map[int]int)
+
+	// initialize map
+	for _, card := range puzzleData {
+		cardCopiesMap[card.cardID] = 1
+	}
+
+	// find copies
+	for _, card := range puzzleData {
+		result := getCardCopies(card)
+		if result > 0 {
+			for i := 1; i <= getCardCopies(card); i++ {
+				currentIndex := card.cardID + i
+				// we add as much copies as there are cards of the currentCard number
+				cardCopiesMap[currentIndex] += cardCopiesMap[card.cardID]
+			}
+		}
+	}
+
+	// sum all cards
+	for _, value := range cardCopiesMap {
+		sum += value
+	}
 
 	return
 }
