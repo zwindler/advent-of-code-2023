@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type xToY struct {
 	destinationRangeStart int
 	sourceRangeStart      int
@@ -18,7 +20,8 @@ type almanac struct {
 }
 
 func main() {
-
+	puzzleData := almanac{}
+	fmt.Println(findLowestLocation(puzzleData))
 }
 
 func findLowestLocation(almanac) (lowest int) {
