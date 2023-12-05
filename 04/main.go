@@ -15,7 +15,7 @@ func main() {
 	filename := "puzzleData.txt"
 	puzzleData, _ := readPuzzleData(filename)
 	fmt.Println(sumCardValue(puzzleData))
-	// fmt.Println(puzzleData)
+	fmt.Println(totalScratchcards(puzzleData))
 }
 
 func sumCardValue(puzzleData []card) (sum int) {
@@ -38,7 +38,7 @@ func getCardValue(currentCard card) (value int) {
 	return
 }
 
-func totalScratchboards(puzzleData []card) (sum int) {
+func totalScratchcards(puzzleData []card) (sum int) {
 	cardCopiesMap := make(map[int]int)
 
 	// initialize map

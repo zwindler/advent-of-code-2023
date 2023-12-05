@@ -22,7 +22,7 @@ func TestSumCardValue(t *testing.T) {
 }
 
 
-func TestTotalScratchboards(t *testing.T) {
+func TestTotalScratchcards(t *testing.T) {
 	filename := "testData.txt"
 	puzzleData, _ := readPuzzleData(filename)
 
@@ -34,7 +34,7 @@ func TestTotalScratchboards(t *testing.T) {
 			expectedValue: 30},
 	}
 	for _, tc := range tcs {
-		testValue := totalScratchboards(tc.data)
+		testValue := totalScratchcards(tc.data)
 		if testValue != tc.expectedValue {
 			t.Errorf("Sum value is %v, expected %d", testValue, tc.expectedValue)
 		}
