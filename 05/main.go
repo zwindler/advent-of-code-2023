@@ -26,7 +26,16 @@ func main() {
 
 func findLowestLocation(alm almanac) (lowest int) {
 	s2SMap := buildXToYMap(alm.s2S)
-	fmt.Println(s2SMap)
+	// S2FMap := buildXToYMap(alm.s2F)
+	// f2WMap := buildXToYMap(alm.f2W)
+	// w2LMap := buildXToYMap(alm.w2L)
+	// l2TMap := buildXToYMap(alm.l2T)
+	// t2HMap := buildXToYMap(alm.t2H)
+	// h2LMap := buildXToYMap(alm.h2L)
+
+	for _, seed := range alm.seedsList {
+		fmt.Println(s2SMap[seed])
+	}
 	return
 }
 
