@@ -22,7 +22,7 @@ func sumCardValue(puzzleData []card) (sum int) {
 	for _, card := range puzzleData {
 		sum += getCardValue(card)
 	}
-	return sum
+	return
 }
 
 func getCardValue(currentCard card) (value int) {
@@ -35,5 +35,19 @@ func getCardValue(currentCard card) (value int) {
 			}
 		}
 	}
-	return value
+	return
+}
+
+func totalScratchboards(puzzleData []card) (value int) {
+
+	return
+}
+
+func getCardCopies(currentCard card) (result int) {
+	for _, playing := range currentCard.playingNumbers {
+		if slices.Contains(currentCard.winningNumbers, playing) {
+			result += 1
+		}
+	}
+	return
 }
