@@ -5,36 +5,36 @@ import "testing"
 var (
 	seeds      = []int{79, 14, 55, 13}
 	seedToSoil = []xToY{
-		{sourceRangeStart: 50, destinationRangeStart: 98, rangeSize: 2},
-		{sourceRangeStart: 52, destinationRangeStart: 50, rangeSize: 48},
+		{destinationRangeStart: 50, sourceRangeStart: 98, rangeSize: 2},
+		{destinationRangeStart: 52, sourceRangeStart: 50, rangeSize: 48},
 	}
 	soilToFertilizer = []xToY{
-		{sourceRangeStart: 0, destinationRangeStart: 15, rangeSize: 37},
-		{sourceRangeStart: 37, destinationRangeStart: 52, rangeSize: 2},
-		{sourceRangeStart: 39, destinationRangeStart: 0, rangeSize: 15},
+		{destinationRangeStart: 0, sourceRangeStart: 15, rangeSize: 37},
+		{destinationRangeStart: 37, sourceRangeStart: 52, rangeSize: 2},
+		{destinationRangeStart: 39, sourceRangeStart: 0, rangeSize: 15},
 	}
 	fertilizerToWater = []xToY{
-		{sourceRangeStart: 49, destinationRangeStart: 53, rangeSize: 8},
-		{sourceRangeStart: 0, destinationRangeStart: 11, rangeSize: 42},
-		{sourceRangeStart: 42, destinationRangeStart: 0, rangeSize: 7},
-		{sourceRangeStart: 57, destinationRangeStart: 7, rangeSize: 4},
+		{destinationRangeStart: 49, sourceRangeStart: 53, rangeSize: 8},
+		{destinationRangeStart: 0, sourceRangeStart: 11, rangeSize: 42},
+		{destinationRangeStart: 42, sourceRangeStart: 0, rangeSize: 7},
+		{destinationRangeStart: 57, sourceRangeStart: 7, rangeSize: 4},
 	}
 	waterToLight = []xToY{
-		{sourceRangeStart: 88, destinationRangeStart: 18, rangeSize: 7},
-		{sourceRangeStart: 18, destinationRangeStart: 25, rangeSize: 70},
+		{destinationRangeStart: 88, sourceRangeStart: 18, rangeSize: 7},
+		{destinationRangeStart: 18, sourceRangeStart: 25, rangeSize: 70},
 	}
 	lightToTemperature = []xToY{
-		{sourceRangeStart: 45, destinationRangeStart: 77, rangeSize: 23},
-		{sourceRangeStart: 81, destinationRangeStart: 45, rangeSize: 19},
-		{sourceRangeStart: 68, destinationRangeStart: 64, rangeSize: 13},
+		{destinationRangeStart: 45, sourceRangeStart: 77, rangeSize: 23},
+		{destinationRangeStart: 81, sourceRangeStart: 45, rangeSize: 19},
+		{destinationRangeStart: 68, sourceRangeStart: 64, rangeSize: 13},
 	}
 	temperatureToHumidity = []xToY{
-		{sourceRangeStart: 0, destinationRangeStart: 69, rangeSize: 1},
-		{sourceRangeStart: 1, destinationRangeStart: 0, rangeSize: 69},
+		{destinationRangeStart: 0, sourceRangeStart: 69, rangeSize: 1},
+		{destinationRangeStart: 1, sourceRangeStart: 0, rangeSize: 69},
 	}
 	humidityToLocation = []xToY{
-		{sourceRangeStart: 60, destinationRangeStart: 56, rangeSize: 37},
-		{sourceRangeStart: 56, destinationRangeStart: 93, rangeSize: 4},
+		{destinationRangeStart: 60, sourceRangeStart: 56, rangeSize: 37},
+		{destinationRangeStart: 56, sourceRangeStart: 93, rangeSize: 4},
 	}
 	testData = almanac{
 		seedsList: seeds,

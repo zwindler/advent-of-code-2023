@@ -24,6 +24,22 @@ func main() {
 	fmt.Println(findLowestLocation(puzzleData))
 }
 
-func findLowestLocation(almanac) (lowest int) {
+func findLowestLocation(alm almanac) (lowest int) {
+	s2SMap := buildXToYMap(alm.s2S)
+	fmt.Println(s2SMap)
+	return
+}
+
+func buildXToYMap(CurrentXToY []xToY) (realMap map[int]int) {
+	realMap = make(map[int]int)
+	for _, xtoy := range CurrentXToY {
+		fmt.Println(xtoy)
+		for i := 0; i < xtoy.rangeSize; i++ {
+			source := xtoy.sourceRangeStart + i
+			destination := xtoy.destinationRangeStart + i
+			realMap[source] = destination
+		}
+	}
+
 	return
 }
